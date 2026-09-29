@@ -209,11 +209,11 @@ def main(argv=None, stdout=None, stdin=None, HTML=HTML):  # noqa: N803
         fetcher_args['allow_redirects'] = False
     if args.fail_on_http_errors:
         fetcher_args['fail_on_errors'] = True
+    url_fetcher = URLFetcher(**fetcher_args)
     if args.user:
         pwmanager=urllib.request.HTTPPasswordMgrWithDefaultRealm()
         pwmanager.add_password(None,args.input,args.user,args.password)
-        fetcher_args['pwmanager'] = pwmanager
-    url_fetcher = URLFetcher(**fetcher_args)
+        url_fetcher.add_handler(urllib.request.HTTPBasicAuthHandler(pwmanager))
 
     options = {
         key: value for key, value in vars(args).items() if key in DEFAULT_OPTIONS}

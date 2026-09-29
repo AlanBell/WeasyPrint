@@ -253,7 +253,7 @@ class URLFetcher(request.OpenerDirector):
     """
 
     def __init__(self, timeout=10, ssl_context=None, http_headers=None,
-                 allowed_protocols=None, allow_redirects=True, fail_on_errors=False,pwmanager=False,
+                 allowed_protocols=None, allow_redirects=True, fail_on_errors=False,
                  **kwargs):
         super().__init__()
         handlers = [
@@ -270,8 +270,6 @@ class URLFetcher(request.OpenerDirector):
         self._allowed_protocols = allowed_protocols
         self._fail_on_errors = fail_on_errors
         self._request = None
-        if(pwmanager):
-            self.add_handler(request.HTTPBasicAuthHandler(pwmanager))
 
     def fetch(self, url, headers=None):
         """Fetch a given URL.
