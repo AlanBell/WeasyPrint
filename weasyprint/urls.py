@@ -265,6 +265,7 @@ class URLFetcher(request.OpenerDirector):
             handlers.append(request.HTTPRedirectHandler())
         for handler in handlers:
             self.add_handler(handler)
+
         self._timeout = timeout
         self._http_headers = {**HTTP_HEADERS, **(http_headers or {})}
         self._allowed_protocols = allowed_protocols
